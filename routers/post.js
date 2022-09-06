@@ -3,7 +3,7 @@ const {createPost,getAllPost,getById,deletePost,updatePost} = require("../contro
 const {verifyToken,verifyAdmin,verifyUser} = require("../utils/verifyToken");
 
 router.post('/create',verifyToken,verifyUser, createPost);
-router.get('/all',getAllPost);
+router.get('/all',verifyToken,getAllPost);
 router.put('/:id',verifyUser,updatePost);
 router.get('/:id',getById);
 router.delete('/:id',verifyUser,deletePost);
