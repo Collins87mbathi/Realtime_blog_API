@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -47,10 +47,10 @@ jobs:
           name: node-app
 
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
         with:
           app-name: 'perezblog'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_719EA530427846B6A4EF09C8C1B420BB }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_59CC066B25414256BFA60EE534D85A5C }}
           package: .
