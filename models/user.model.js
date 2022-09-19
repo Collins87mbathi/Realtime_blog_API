@@ -12,7 +12,7 @@ module.exports =  (sequelize, Sequelize) => {
         
       },
       img: {
-        type: Sequelize.JSON,
+        type: Sequelize.STRING,
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,

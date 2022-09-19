@@ -2,7 +2,6 @@ const db = require("../models/index");
 const User = db.user;
 const bcrypt = require("bcryptjs");
 const emailValidator = require("../validators/emailValidator");
-const passwordValidator = require("../validators/passwordValidator");
 const error = require("../errorhandler/error");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -19,9 +18,9 @@ try {
     if(!emailValidator(email)) {
         return next(error(400, "please input a valid mail"));
     }
-    if(!passwordValidator(password)){
-        return next(error(400, "password must contain uppercase and a number"));
-    }
+    // if(!passwordValidator(password)){
+    //     return next(error(400, "password must contain uppercase and a number"));
+    // }
     const checkmail = await User.findOne({where : {email : email}});
     if(checkmail) return next(error(402, "this email already exist"));
 
@@ -33,9 +32,9 @@ try {
      email:email,
      password:hash
     });
-   const savedUser = await createUser.save();
+   const user = await createUser.save();
 
-   res.status(200).json({savedUser});
+   res.status(200).json({user});
 
 } catch (error) {
     next(error);
@@ -55,8 +54,10 @@ try {
     if(!isMatch) {
         return next(error(402, "incorrect password"));
     }
-    const token = jwt.sign({id:user.id , isAdmin:user.isAdmin,name:user.name,img:user.img}, process.env.JWT);
-  res.cookie("access_token", token, {httpOnly: true,}).status(200).json("login successfully");
+    const token = jwt.sign({id:user.id , isAdmin:user.isAdmin}, process.env.JWT);
+    
+     
+  res.cookie("access_token", token, {httpOnly: true}).status(200).json({user});
 } catch (error) {
    next(error); 
 }
@@ -64,11 +65,11 @@ try {
 
 const updateUser = async (req,res,next) => {
     try {
-      const updated = await User.update(req.body, {
-            where: {id:req.params.id}
-        })
-     res.status(200).json({updated});
+   await User.update(req.body, {
+        where: {id:req.params.id}
+     })
 
+     res.status(200).json("update successfully");   
     } catch (error) {
         next(error);
     }

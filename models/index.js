@@ -22,11 +22,24 @@ const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PA
  db.comment = require("./comment.model")(sequelize,Sequelize);
  db.replies = require("./replies.model")(sequelize,Sequelize);
  db.category = require("./category.model")(sequelize, Sequelize)
+ db.likes = require("./like.model")(sequelize,Sequelize);
  db.user.hasMany(db.post, {
     onDelete:"cascade"
  });
 db.post.hasMany(db.comment,{
     onDelete:"cascade"
+});
+db.post.hasMany(db.likes,{
+    onDelete:"cascade"
+});
+db.user.hasMany(db.likes,{
+    onDelete:"cascade"
+});
+db.likes.belongsTo(db.post,{
+    foreignKey:"postId"
+});
+db.likes.belongsTo(db.user,{
+    foreignKey:"userId"
 });
 db.comment.belongsTo(db.post,{
     foreignKey:"postId"

@@ -3,11 +3,10 @@ const Replies = db.replies;
 const error = require("../errorhandler/error");
 
 const createReplies = async(req,res,next) => {
- const {name,id} = req.user;
+ const {id} = req.user;
 try {
    const createdReply = await Replies.create({
     desc:req.body.desc,
-    username:name,
     commentId:req.params.id,
     userId:id
    });

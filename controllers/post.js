@@ -5,27 +5,24 @@ const Op = db.Sequelize.Op;
 const Post = db.post;
 
 const createPost = async (req,res,next)=> {
-    const {id,name,img} = req.user;
+    // const {id} = req.user;
 try {
-const {title,desc,category,postimg} = req.body;
-if(!title || !desc || !category) return next(error(401, "please input values"));
+const {title,desc,category,postimg,userimg,username,userId} = req.body;
+if(!title || !desc ) return next(error(401, "please input values"));
 
 if(!postimg) return next(error(401, "no images uploaded"));
 
 const post = await Post.create({
-    title: title,
-    desc: desc,
-    userId:id,
-    username:name,
-    userimg:img,
-    category:category,
-    Postimg:postimg
-
+    userId,
+    title,
+    desc,
+    category,
+    postimg,
+    userimg,
+    username
 });
 const savedPost = await post.save();
-
 res.status(200).json({savedPost});
-
 } catch (error) {
     next(error);
 }
@@ -69,7 +66,7 @@ const getAllPost = async (req,res,next) => {
 let category = req.query.category;
 let search = req.query.search;
 let options = { where: {},
-include:[db.comment]
+include:[db.comment,db.likes]
 }
     try {
         if(category) options.where.category = category;

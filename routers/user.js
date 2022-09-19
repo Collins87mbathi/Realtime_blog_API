@@ -6,8 +6,8 @@ router.post('/register',Register);
 router.post('/login',Login);
 router.get('/all',verifyAdmin,getAllUsers);
 router.get('/:id',getById);
-router.put('/:id',verifyUser,updateUser);
-router.delete('/:id',verifyUser,deleteUser);
+router.put('/:id',verifyToken,verifyUser,updateUser);
+router.delete('/:id',verifyToken,verifyUser,deleteUser);
 
 
 module.exports = router;

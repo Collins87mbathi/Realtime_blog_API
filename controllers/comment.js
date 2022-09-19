@@ -3,13 +3,14 @@ const Comment = db.comment;
 const error = require("../errorhandler/error");
 
 const createComment = async (req,res,next) => {
-    const {id,name} = req.user;
+    // const {id} = req.user;
 try {
     const createdComment = await Comment.create({
       desc:req.body.desc,
-      username:name,
       postId:req.params.id,
-      userId:id
+      userId:req.body.userId,
+      username: req.body.username,
+      userimg: req.body.userimg 
     });
     const savedComment = await createdComment.save();
     res.status(200).json({savedComment});
@@ -50,7 +51,7 @@ const updateComment = async (req,res,next) => {
     } catch (error) {
      next(error); 
     } 
-  }
+  } 
   
   const deleteComment = async (req,res,next) => {
       try {

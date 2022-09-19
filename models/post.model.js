@@ -13,10 +13,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
            },
         postimg: {
-            type: Sequelize.JSON,
+            type: Sequelize.STRING,
           },
           userimg: {
-            type: Sequelize.JSON,
+            type: Sequelize.STRING,
           }
 
     });

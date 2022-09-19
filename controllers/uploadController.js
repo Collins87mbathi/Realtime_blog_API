@@ -11,11 +11,11 @@ cloudinary.config({
 const uploadcontroller  = (req,res,next) => {
     
      try {
-         const file = req.files.undefined;
-         cloudinary.v2.uploader.upload(file.tempFilePath, {
+         const file = req.files.files;
+         cloudinary.v2.uploader.upload(file?.tempFilePath, {
             folder: 'post_image'}, async(err, result) => {
             if(err) throw err;
-            removeTmp(file.tempFilePath)
+            removeTmp(file?.tempFilePath)
             res.json({public_id: result.public_id, url: result.secure_url})
         })
 
