@@ -42,9 +42,10 @@ db.sequelize.sync()
 
 const io = new Server(http,{ 
   cors: {
-    origin: "http://localhost:3000"
+    origin: "https://collinsblogs.netlify.app"
 }
 });
+
 
 io.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
