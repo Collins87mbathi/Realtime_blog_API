@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASSWORD, {
-    host: 'localhost',
+    host: process.env.HOST,
     dialect: "mysql",
     operatorsAliases:0,
     pool: {
