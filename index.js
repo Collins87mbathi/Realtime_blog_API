@@ -14,7 +14,7 @@ const LikeRoute = require("./routers/likes");
 const multer = require("multer");
 // const uploadRoute = require("./routers/upload");
 const path = require("path");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const session = require('express-session');
 // const fileUpload = require('express-fileupload');
 const http = require('http').Server(app);
@@ -23,7 +23,7 @@ const cors = require('cors');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cookieParser());
+// app.use(cookieParser());
 //session of a user after login 
 app.use(
   session({
