@@ -37,9 +37,14 @@ app.use(cookieParser());
 //   })
 // )
 
-app.use(cors({ credentials:true, origin:'https://collinsblogs.netlify.app'}));
+app.use(cors({ credentials:true, origin:'https://collinsblogs.herokuapp.com'}));
 
+//client
+app.use(express.static(path.join(__dirname, "/client/build")));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
 // app.use(fileUpload({    
 //   useTempFiles: true
 // }));
@@ -56,7 +61,7 @@ db.sequelize.sync()
 
 const io = new Server(http,{ 
   cors: {
-    origin: "https://collinsblogs.netlify.app"
+    origin: "https://collinsblogs.herokuapp.com"
 }
 });
 
@@ -101,9 +106,9 @@ io.on("connection", (socket) => {
   const upload = multer({ storage: storage });
 
 //router
-app.get('/', (req,res)=> {
- res.send("This is a realtime BLOG API");
-});
+// app.get('/', (req,res)=> {
+//  res.send("This is a realtime BLOG API");
+// });
 app.use('/api/user', UserRoute);
 app.use('/api/post', PostRoute);
 app.use('/api/comment', CommentRoute);
