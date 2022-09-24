@@ -24,7 +24,7 @@ const post = await Post.create({
 const savedPost = await post.save();
 res.status(200).json({savedPost});
 } catch (error) {
-    next(error);
+    console.log(error);
 }
 }
 
