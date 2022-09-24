@@ -14,8 +14,8 @@ const LikeRoute = require("./routers/likes");
 const multer = require("multer");
 // const uploadRoute = require("./routers/upload");
 const path = require("path");
-// const cookieParser = require("cookie-parser");
-const session = require('express-session');
+const cookieParser = require("cookie-parser");
+// const session = require('express-session');
 // const fileUpload = require('express-fileupload');
 const http = require('http').Server(app);
 const cors = require('cors');
@@ -23,22 +23,22 @@ const cors = require('cors');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-// app.use(cookieParser());
+app.use(cookieParser());
 //session of a user after login 
-app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-  })
-)
+// app.use(
+//   session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       httpOnly: true,
+//       secure: false,
+//       maxAge: 24 * 60 * 60 * 1000,
+//     },
+//   })
+// )
 
-app.use(cors({ credentials:true, origin:'*'}));
+app.use(cors({ credentials:true, origin:'https://collinsblogs.netlify.app'}));
 app.set('trust proxy', 1)
 
 // app.use(fileUpload({    
