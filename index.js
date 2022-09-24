@@ -39,7 +39,7 @@ app.use(
 )
 
 app.use(cors({ credentials:true, origin:'*'}));
-app.set('trust proxy', 1)
+// app.set('trust proxy', 1)
 
 // app.use(fileUpload({    
 //   useTempFiles: true
