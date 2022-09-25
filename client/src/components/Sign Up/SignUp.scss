@@ -1,0 +1,70 @@
+@import "../variables/variables";
+  
+  .signup {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    
+
+  }
+  .signup > form {
+    width: 70%;
+    border: 1px solid $color;
+    padding: 20px;
+    border-radius: 5px;
+    background: transparent;
+  }
+  pre {
+    width: 70%;
+    color: #fff;
+    font-size: larger;
+  }
+  
+  .signup-button {
+    background: $color ;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid $color;
+    border: none;
+    color: white;
+    transition: all ease 1s;
+    &:hover{
+        background: white;
+        color: $color;
+        
+    }
+  }
+  .errors {
+    color: red;
+  }
+
+  .form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  }
+
+.field {
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input {
+    border: none;
+    margin: 8px 0;
+    border:2px solid $color;
+    outline: none;
+    width: 300px;
+    background: none;
+}
+input:focus {
+    border-color: $color;
+}

@@ -1,0 +1,106 @@
+@import "../variables/variables";
+
+
+.setting {
+    flex: 9;
+  }
+  .settingWrapper {
+    margin: 15px 35px;
+    display: flex;
+    flex-direction: column;
+    width: 80%
+  }
+  .settingTitles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .settingUpdateTitle {
+    font-size: 32px;
+    font-weight: 700;
+    color: rgb(1, 56, 56);
+  }
+  .settingDeleteTitle {
+    font-size: 17px;
+    font-family: 500;
+    color: rgb(247, 86, 58);
+    cursor: pointer;
+  }
+  
+  .settingForm {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .settingLabel {
+    font-size: 21px;
+    margin: 30px 0 15px 0;
+  }
+  .settingImage {
+    position: relative;
+  }
+  
+  .profilePicture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profileIcon {
+    position: absolute;
+    bottom: 20px;
+    left: 115px;
+    font-size: 22px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+  }
+  
+  .settingInput {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid grey;
+    border-radius: 0;
+  }
+  
+  .settingInput:focus {
+    outline: none;
+  }
+  
+  .settingBtn{
+      margin-top: 35px;
+      background-color: $color;
+      padding: 10px;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      width: 12%;
+      border-radius: 8px;
+  }
+  
+  @media screen and (max-width:768px) {
+    .settingUpdateTitle{
+      font-size: 17px;
+    }
+    .settingDeleteTitle{
+      font-size: 13px;
+    }
+    .settingBtn {
+        font-size: 13px;
+        width: 20%;
+    }
+    .settingLabel {
+        font-size: 16px;
+        
+      }
+
+      .settingInput {
+        font-size: 12px;
+      }
+  }

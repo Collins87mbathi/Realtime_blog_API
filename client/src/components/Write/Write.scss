@@ -1,0 +1,122 @@
+@import "../variables/variables";
+
+.write{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+.writeWrapper{
+padding: 10px 30px;
+width: 70%;
+}
+.writeImg{
+    width: 100%;
+    height: 530px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.writeForm{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.formGroup{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    align-items: center;
+}
+.writeIcon{
+    width: 35px;
+    height: 35px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(65, 62, 62);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.writeInput{
+width: 93%;
+font-size: 28px;
+display: flex;
+align-items: center;
+justify-content: center;
+border: none;
+}
+.writeInput:focus{
+    outline: none;
+}
+
+.textInput{
+    width: 100%;
+    height: 200px;
+    font-size: 16.9px;
+    color: grey;
+    border: none;
+}
+.textInput:focus{
+    outline: none;
+}
+
+.writeBtn{
+    padding: 7px 14px;
+    border: none;
+    border-radius: 6px;
+    background: $color;
+    color:white;
+    transition: all ease 1s;
+    font-size: 1rem;
+    cursor: pointer;
+    
+}
+
+.selectDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.selectCat{
+padding: 10px;
+}
+
+.selectCat option{
+    font-size: 16px;
+}
+.write-icon {
+    font-size: 2rem;
+}
+
+@media screen and (max-width:768px) {
+    .writeInput {
+        font-size: 1rem;
+    }
+    .textInput {
+        font-size: 13.9px;
+    }
+    .selectCat {
+        font-size: 15px;
+    }
+    .selectCat option{
+        font-size: 10px;
+    }
+
+    .writeBtn{
+        padding: 10px;
+        width: 90px;
+        font-size: 15px;
+    
+    }
+
+    .writeImg{
+        width: 100%;
+        height: 330px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+}

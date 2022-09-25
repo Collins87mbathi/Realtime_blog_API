@@ -1,0 +1,21 @@
+
+.title-notification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+        cursor: pointer;
+        font-size: 0.8rem;
+    }
+}
+.notification-body {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}

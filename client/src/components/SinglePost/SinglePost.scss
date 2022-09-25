@@ -1,0 +1,170 @@
+.singlePost {
+    flex: 9;
+  }
+  .singlePostWrapper {
+    padding: 10px;
+    margin-right: 25px;
+    padding-left: 30px;
+    margin-top: 20px;
+  }
+  
+  .singlePostImg {
+    width: 100%;
+    height: 550px;
+    border-radius: 7px;
+    object-fit: cover;
+  }
+  
+  .singlePostTitleInfo {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .singlePostTitle {
+   text-align: center;
+    font-size: 24px;
+    font-family: "Lora", serif;
+    letter-spacing: 0.05rem;
+    color: rgb(48, 48, 48);
+  }
+  .singlePostIcons {
+    margin-left: 300px;
+    font-size: 20px;
+  }
+  
+  .edit {
+    color: teal;
+    cursor: pointer;
+  }
+  .trash {
+    margin-left: 10px;
+    color: tomato;
+    cursor: pointer;
+  }
+  
+  .singlePostAuthorInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .singlePostAuthorName {
+    color: rgb(192, 130, 15);
+    font-size: 18px;
+  }
+  
+  .singlePostDate {
+    color: rgb(99, 98, 98);
+    font-size: 14px;
+    font-family: "Lora", serif;
+    font-style: italic;
+  }
+  
+  .singlePostTime {
+    color: rgb(68, 67, 67);
+    font-size: 13px;
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 550;
+  }
+  
+  .singlePostDescription {
+    text-align: justify;
+    line-height: 1.52rem;
+    font-size: 14.4px;
+    font-family: "Varela Round", sans-serif;
+  }
+  
+  .singlePostDescription::first-letter {
+    font-size: 35px;
+    font-family: cursive;
+    color: rgb(194, 143, 49);
+    font-weight: bold;
+  }
+  
+  .singlePostUpdateTitleInput {
+    padding: 5px 10px;
+    border: 2px solid rgb(194, 143, 49);
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: 600;
+    color: rgb(110, 109, 109);
+  }
+  .singlePostUpdateTitleInput:focus {
+    outline: none;
+  }
+  
+  .singlePostUpdateDescInput {
+    width: 100%;
+    height: 300px;
+    padding: 5px 10px;
+    border: 2px solid rgb(194, 143, 49);
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.45rem;
+    color: grey;
+    text-align: justify;
+  }
+  .singlePostUpdateDescInput:focus {
+    outline: none;
+  }
+  
+  .singlePostBtnWrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .singlePostBtn {
+    padding: 9px 18px;
+    margin-top: 10px;
+    background-color: teal;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 450;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width:480px) {
+    .singlePostTitleInfo{
+      flex-direction: column;
+    }
+    .singlePostTitle{
+      font-size: 16px;
+    }
+    .singlePostImg{
+      height: 250px;
+    }
+    .edit{
+      font-size: 14px;
+    }
+    .trash{
+      font-size: 14px;
+    }
+    .singlePostIcons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5rem;
+    }
+
+     .singlePostAuthorName {
+      font-size: 12px;
+    }
+    .singlePostTime {
+      font-size: 10px;
+    }
+
+    .singlePostAuthorInfo {
+      margin-bottom: 10px;
+    }
+    .singlePostWrapper {
+      margin-bottom: 1rem;
+    }
+  }

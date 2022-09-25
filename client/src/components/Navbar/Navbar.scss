@@ -1,0 +1,142 @@
+@import "../variables/variables";
+
+.navbar {
+    width: 100%;
+    height: 90px;
+    top: 0;
+    left: 0;
+    background-color: $background-color;
+    border-bottom: 2px solid #eee;
+    position:relative;
+    position:fixed;
+    z-index:99;
+    
+    .logo {
+        height: 80px;
+      }
+}
+
+.logout {
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    align-items: center;
+  }
+  
+  a {
+    text-decoration: none;
+    color:$color;
+    transition: all ease 1s;
+    &:hover{
+        color: black;
+    }
+  }
+  .topRight {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .topImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+.container {
+    max-width: 1240px;
+    margin: auto;
+    
+  }
+
+.navbar .container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:1rem;
+}
+
+.navbar span {
+    color: #5651e5;
+}
+
+.navbar .nav-menu {
+    display: flex;
+}
+
+.navbar li {
+    padding: 1rem;
+}
+
+.hamburger {
+    display: none;
+}
+
+.navbar .icon {
+    font-size: 1.5rem;
+}
+
+.notification-navbar {
+    font-size: 2.3rem;
+}
+
+@media screen and (max-width:940px) {
+    .hamburger {
+        display: block;
+    }
+
+    .navbar .nav-menu {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 90px;
+        right: -100%;
+        height: 100%;
+        width: 100%;
+        background-color:$background-color;
+        transition: 0.4s ease-in-out;
+        z-index: 10;
+        position:fixed;
+    }
+
+    .navbar .active {
+        right: 0;
+    }
+
+    .navbar .nav-menu li a {
+        font-size: 1.8rem;
+    }
+}
+  
+
+.btn {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color:$color;
+    transition: all ease 1s;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover{
+        background-color: $color;
+        color: white;
+    }
+}
+
+.active-btn {
+    background: $color;
+    color: white;
+    margin: 10px;
+    transition: all ease 1s;
+    cursor: pointer;
+    &:hover {
+        background-color: white;
+        color:$color;
+    }
+}
