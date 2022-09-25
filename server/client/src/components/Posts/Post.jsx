@@ -64,7 +64,7 @@ const LikeAPost = async () => {
         </div>
         <div className="post-emoji">
         <span className='like-emoji' onClick={LikeAPost}>{click ?  <FcLike/> : <FcLikePlaceholder/> } {like}</span>
-        <span><BiCommentDetail/>{post.comments.length}</span>
+        <span><BiCommentDetail/>{post.comments?.length}</span>
       </div>
       </div>
         </>
