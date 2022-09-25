@@ -24,7 +24,7 @@ const Navbar = ({notification}) => {
           <div className='container'>
               <img className='logo' src={logo} alt="logo"/>
               <Link to ='/notification'>
-              <Noty width={"32px"} color="rgb(45, 45, 222)" count={notification?.length} />
+              <Noty width={"32px"} color="rgb(45, 45, 222)" count={notification.length} />
                 </Link>
               <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                   <li><Link to='/'>Home</Link></li>
