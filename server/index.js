@@ -19,11 +19,15 @@ const cookieParser = require("cookie-parser");
 // const fileUpload = require('express-fileupload');
 const http = require('http').Server(app);
 const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+app.use(morgan('combined'));
+app.use(helmet());
 //session of a user after login 
 // app.use(
 //   session({
