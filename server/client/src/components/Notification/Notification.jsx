@@ -38,7 +38,7 @@ const handleRead = () => {
         <h3 className='small-title'>Notifications</h3>
         <span onClick={handleRead}>mark all as read</span>
       </div>
-      {notification.map((n) => displayNotification(n))}
+      {notification?.map((n) => displayNotification(n))}
     </div>
   )
 
