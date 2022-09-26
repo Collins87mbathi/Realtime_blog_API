@@ -34,7 +34,7 @@ const LikeAPost = async () => {
   });
    try {
     
-    await axiosInstance.post(`likes`, {
+    await axiosInstance.post('likes', {
      postId : post.id,
    }, {
     withCredentials: true

@@ -2,8 +2,8 @@ import React, { useState,useEffect } from 'react';
 import Filter from '../Filter/Filter';
 import Post from './Post';
 import "./Posts.scss";
-// import axios from 'axios';
-import { axiosInstance } from '../../config/config';
+import axios from 'axios';
+// import { axiosInstance } from '../../config/config';
 // import {BASE_URL} from '../../config/config'
 
 const Posts = ({socket}) => {
@@ -13,7 +13,7 @@ const Posts = ({socket}) => {
     
     useEffect(() =>{
       const getProducts = async () => {
-          const res = await axiosInstance.get(`post/all?category=${category}&search=${search}`);
+          const res = await axios.get(`http://localhost:3001/api/post/all?category=${category}&search=${search}`);
           setPosts(res.data.posts)
       }
       getProducts()

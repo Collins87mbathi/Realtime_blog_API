@@ -47,7 +47,7 @@ const handleSubmit = async (e) =>{
     newPost.postimg = filename;
     try {
       axios.defaults.withCredentials = true;
-      await axiosInstance.post('upload', data, {
+      await axios.post('upload', data, {
         withCredentials: true
       });
     } catch (err) {
@@ -103,7 +103,7 @@ const handleSubmit = async (e) =>{
             ></textarea>
             <select  onChange={(e) => setCategory(e.target.value)}  className="selectCat">
             <option disabled>Category</option>
-              {categories.map((cat) => (
+              {categories?.map((cat) => (
                 <option key={cat.id}>{cat.title}</option>
               ))}
             </select>
