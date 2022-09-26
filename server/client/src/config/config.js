@@ -1,2 +1,7 @@
-export const BASE_URL = "https://collinsblogs.herokuapp.com";
+import axios from "axios";
 
+
+export const axiosInstance = axios.create({
+    baseURL: 'http://localhost:3001/api/',
+    withCredentials:true
+  });

@@ -5,8 +5,9 @@ import {useSelector} from "react-redux";
 import {GrSend} from "react-icons/gr";
 import { createImageFromInitials } from '../../utils/getInitials';
 import {getRandomColor} from '../../utils/getRandomColor';
-import {BASE_URL} from '../../config/config';
-import axios from 'axios';
+// import {BASE_URL} from '../../config/config';
+// import axios from 'axios';
+import { axiosInstance } from '../../config/config';
 const IM = "https://collinsblogs.herokuapp.com/images/"
 
 const Comments = ({comments, id, socket}) => {
@@ -20,8 +21,8 @@ const Comments = ({comments, id, socket}) => {
       type:1
     });
 
-    axios.defaults.withCredentials = true;
-   const res = await axios.post(`${BASE_URL}/api/comment/${id}/create`, {
+    axiosInstance.defaults.withCredentials = true;
+   const res = await axiosInstance.post(`comment/${id}/create`, {
      desc:newComment,
      userId: user.id,
      username: user.name,

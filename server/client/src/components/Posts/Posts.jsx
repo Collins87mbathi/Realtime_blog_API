@@ -2,8 +2,9 @@ import React, { useState,useEffect } from 'react';
 import Filter from '../Filter/Filter';
 import Post from './Post';
 import "./Posts.scss";
-import axios from 'axios';
-import { BASE_URL } from '../../config/config';
+// import axios from 'axios';
+import { axiosInstance } from '../../config/config';
+// import {BASE_URL} from '../../config/config'
 
 const Posts = ({socket}) => {
   const [posts, setPosts] = useState([])
@@ -12,7 +13,7 @@ const Posts = ({socket}) => {
     
     useEffect(() =>{
       const getProducts = async () => {
-          const res = await axios.get(`${BASE_URL}/api/post/all?category=${category}&search=${search}`);
+          const res = await axiosInstance.get(`post/all?category=${category}&search=${search}`);
           setPosts(res.data.posts)
       }
       getProducts()
@@ -22,9 +23,9 @@ const Posts = ({socket}) => {
     <>
     <Filter search={search} category={category} setSearch={setSearch} setCategory={setCategory}/>
     <div className='Posts'>
-     {posts.length === 0 ? (<p>no post with that name or category</p>) : (
+     {posts?.length === 0 ? (<p>no post with that name or category</p>) : (
 
-posts.map((post) => {
+posts?.map((post) => {
   return <Post socket={socket} key={post.id} post={post}/>
 })
      )

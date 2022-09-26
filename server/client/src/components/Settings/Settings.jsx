@@ -1,13 +1,14 @@
 import React,{useState} from 'react'
 import "./Settings.scss";
 import {CgProfile} from "react-icons/cg";
-import axios from 'axios';
+// import axios from 'axios';
 // import {BASE_URL} from '../../config/config';
 import {setUpdateAccount,} from "../../Redux/Slices/userSlice";
 import {useSelector} from 'react-redux';
 import { createImageFromInitials } from '../../utils/getInitials';
 import {getRandomColor} from '../../utils/getRandomColor'
-import { BASE_URL } from '../../config/config';
+import { axiosInstance } from '../../config/config';
+// import { BASE_URL } from '../../config/config';
 const Settings = () => {
   const user = useSelector((state) => state.user.user);
     const [name, setName] = useState("");
@@ -34,8 +35,8 @@ const Settings = () => {
   
         updatedUser.img = filename;
         try {
-          axios.defaults.withCredentials = true;
-          await axios.post(`${BASE_URL}/api/upload`, data, {
+          axiosInstance.defaults.withCredentials = true;
+          await axiosInstance.post('upload', data, {
             withCredentials: true
           });
         } catch (err) {
@@ -44,8 +45,8 @@ const Settings = () => {
       }
       console.log(file);
       try {
-        axios.defaults.withCredentials = true;
-        const res = await axios.put(`${BASE_URL}/api/user/` + user.id, updatedUser, {
+        axiosInstance.defaults.withCredentials = true;
+        const res = await axiosInstance.put('user/'+ user.id, updatedUser, {
           withCredentials: true
         });
         setSuccess(true);
@@ -57,8 +58,8 @@ const Settings = () => {
   
     const handleDelete = async () => {
       try {
-        axios.defaults.withCredentials = true;
-        await axios.delete(`${BASE_URL}/api/user/${user.id}`, {
+        axiosInstance.defaults.withCredentials = true;
+        await axiosInstance.delete(`user/${user.id}`, {
           withCredentials: true
         });
       } catch (err) {

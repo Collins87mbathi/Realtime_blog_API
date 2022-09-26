@@ -1,7 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import "./Filter.scss"
-import axios from 'axios';
-import { BASE_URL } from '../../config/config';
+// import axios from 'axios';
+import { axiosInstance } from '../../config/config';
+// import {BASE_URL} from '../../config/config'
 
 const Filter = ({search,setSearch,category,setCategory}) => {
 
@@ -9,7 +10,7 @@ const Filter = ({search,setSearch,category,setCategory}) => {
 
   useEffect(()=> {
    const filterCate = async () => {
-   const res  = await axios.get(`${BASE_URL}/api/category/all`);
+   const res  = await axiosInstance.get('category/all');
     setOptions(res.data.allcategories)
    }
    
@@ -27,12 +28,13 @@ const handleCategory = e => {
       <input type="text"  value={search} placeholder='search here....' onChange={e => setSearch(e.target.value.toLowerCase())} className='searchItem'/>
     
     
+    
       </div>
       <div className="search-button">
       <select name="category" value={category} onChange={handleCategory} >
                     <option value=''>All categories</option>
                     {
-                        options.map(category => (
+                        options?.map(category => (
                             <option value={category.title} key={category.id}>
                                 {category.title}
                             </option>

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from "axios";
 import {useSelector} from "react-redux"
-import {BASE_URL} from "../../config/config"
+import {axiosInstance} from "../../config/config"
 import {AiOutlinePlusCircle} from "react-icons/ai";
 import './Write.scss'
 
@@ -15,7 +15,7 @@ const Write = ({socket}) => {
   
   useEffect(() => {
     const getCategories = async () => {
-      const res = await axios.get(`${BASE_URL}/api/category/all`);
+      const res = await axiosInstance.get('category/all');
      setCategories(res.data.allcategories)
     };
     getCategories();
@@ -47,7 +47,7 @@ const handleSubmit = async (e) =>{
     newPost.postimg = filename;
     try {
       axios.defaults.withCredentials = true;
-      await axios.post(`${BASE_URL}/api/upload`, data, {
+      await axiosInstance.post('upload', data, {
         withCredentials: true
       });
     } catch (err) {
@@ -56,7 +56,7 @@ const handleSubmit = async (e) =>{
   }
   try {
     axios.defaults.withCredentials = true;
-    const res  = await axios.post(`${BASE_URL}/api/post/create`,
+    const res  = await axios.post('post/create',
     newPost, {
       withCredentials:true
     }

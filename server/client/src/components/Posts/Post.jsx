@@ -8,8 +8,9 @@ import TimeAgo from 'react-timeago'
 import frenchStrings from 'react-timeago/lib/language-strings/en'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import {getRandomColor} from "../../utils/getRandomColor"
-import axios from 'axios';
-import { BASE_URL } from '../../config/config';
+import { axiosInstance } from '../../config/config';
+// import axios from 'axios';
+// import {BASE_URL} from "../../config/config";
 const IM = "https://collinsblogs.herokuapp.com/images/"
 const formatter = buildFormatter(frenchStrings)
 const Post = ({post, socket}) => {
@@ -32,8 +33,8 @@ const LikeAPost = async () => {
     type:2
   });
    try {
-    axios.defaults.withCredentials = true;
-    await axios.post(`${BASE_URL}/api/likes`, {
+    
+    await axiosInstance.post(`likes`, {
      postId : post.id,
    }, {
     withCredentials: true

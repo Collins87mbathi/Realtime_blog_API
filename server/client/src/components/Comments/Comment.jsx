@@ -6,10 +6,11 @@ import {useSelector} from 'react-redux'
 import englishStrings from 'react-timeago/lib/language-strings/en';
 import { createImageFromInitials } from '../../utils/getInitials';
 import {getRandomColor} from '../../utils/getRandomColor'
-import axios from 'axios';
+// import axios from 'axios';
 import './Comments.scss';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
-import { BASE_URL } from '../../config/config';
+import { axiosInstance } from '../../config/config';
+// import { BASE_URL } from '../../config/config';
 const IM = "https://collinsblogs.herokuapp.com/images/"
 const formatter = buildFormatter(englishStrings);
 
@@ -19,8 +20,8 @@ const Comment = (comment) => {
    const [updateMode, setUpdateMode] = useState(false);
     const deleteComments = async () => {
         try {
-        axios.defaults.withCredentials = true;
-        await axios.delete(`${BASE_URL}/api/comment/${comment.comment.id}`, {
+        axiosInstance.defaults.withCredentials = true;
+        await axiosInstance.delete(`comment/${comment.comment.id}`, {
           withCredentials: true
           });
         window.location.reload("/")
@@ -32,8 +33,8 @@ const Comment = (comment) => {
 
     const updateComments = async () => {
         try {
-            axios.defaults.withCredentials = true;
-            await axios.put(`${BASE_URL}/api/comment/${comment.comment.id}`, {
+            axiosInstance.defaults.withCredentials = true;
+            await axiosInstance.put(`comment/${comment.comment.id}`, {
               desc: commentdesc,
             }, {
                 withCredentials: true

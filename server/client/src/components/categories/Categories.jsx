@@ -1,14 +1,14 @@
 import React,{useState} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import './Categories.scss';
-import { BASE_URL } from '../../config/config';
+import { axiosInstance } from '../../config/config';
 
 const Categories = () => {
     const [category, setCategory] = useState('')
     const createCategory = async e =>{
         e.preventDefault()
         try {
-        const res = await axios.post(`${BASE_URL}/api/category/create`, {title: category})
+        const res = await axiosInstance.post('category/create', {title: category})
        alert(res.data.msg)
        setCategory('') 
         } catch (err) {

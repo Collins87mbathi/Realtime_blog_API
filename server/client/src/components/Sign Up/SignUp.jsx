@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom";
 import {useDispatch} from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 // import {BASE_URL} from '../../config/config'
 import './SignUp.scss';
 import {setLoginFailure,setIsFetching} from "../../Redux/Slices/userSlice";
-import { BASE_URL } from '../../config/config';
+import { axiosInstance } from '../../config/config';
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const SignUp = () => {
     dispatch(setIsFetching());
   try {
     // axios.defaults.withCredentials = true;
-    const res = await axios.post(`${BASE_URL}/api/user/register`, formValues);
+    const res = await axiosInstance.post('user/register', formValues);
     setLoading(false);
     res.data && window.location.replace("#/login");
   } catch (error) {

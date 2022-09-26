@@ -5,10 +5,10 @@ import TimeAgo from 'react-timeago'
 import englishStrings from 'react-timeago/lib/language-strings/en'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import {useSelector} from "react-redux"
-import axios from 'axios';
+// import axios from 'axios';
 import "./SinglePost.scss"
 import Comments from '../Comments/Comments';
-import { BASE_URL } from '../../config/config'
+import { axiosInstance } from '../../config/config'
 const IM = "https://collinsblogs.herokuapp.com/images/"
 const formatter = buildFormatter(englishStrings);
 
@@ -22,7 +22,7 @@ const SinglePost = ({socket}) => {
 
   useEffect(() => {
     const fetchSinglePost = async () => {
-      const res = await axios.get(`${BASE_URL}/api/post/` + id);
+      const res = await axiosInstance.get('post/' + id);
       setSinglePost(res.data.singlepost);
       setTitle(res.data.singlepost.title);
       setDesc(res.data.singlepost.desc);
@@ -33,8 +33,8 @@ const SinglePost = ({socket}) => {
 
   const handleDelete = async () => {
     try {
-      axios.defaults.withCredentials = true;
-      await axios.delete(`${BASE_URL}/api/post/` + id, {
+      axiosInstance.defaults.withCredentials = true;
+      await axiosInstance.delete('post/ '+ id, {
         data: { username: user.name },
       }, {
         withCredentials: true
@@ -45,8 +45,8 @@ const SinglePost = ({socket}) => {
 
   const handleUpdate = async () => {
     try {
-      axios.defaults.withCredentials = true;
-      await axios.put(`${BASE_URL}/api/post/` + id, {
+      axiosInstance.defaults.withCredentials = true;
+      await axiosInstance.put('post/ '+ id, {
         title,
         desc,
       }, {

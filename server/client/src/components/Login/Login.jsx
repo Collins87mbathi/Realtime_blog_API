@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
 import { Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {BASE_URL} from '../../config/config';
-import axios from 'axios';
+import {axiosInstance} from '../../config/config';
+// import axios from 'axios';
 import {setIsFetching, setLoginFailure, setLoginSuccess} from '../../Redux/Slices/userSlice';
 import './Login.scss'
 
@@ -25,7 +25,7 @@ const Login = () => {
     dispatch(setIsFetching());
     setLoading(true);
     try {
-      const res = await axios.post(`${BASE_URL}/api/user/login`, formValues, {
+      const res = await axiosInstance.post('user/login', formValues, {
         withCredentials:true,
       });
       
