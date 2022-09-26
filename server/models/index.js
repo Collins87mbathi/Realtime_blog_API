@@ -11,7 +11,8 @@ const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PA
         min: 0,
         acquire: 30000,
         idle: 10000
-      }
+      },
+    socketPath: '/var/run/mysqld/mysqld.sock'
   });
 
   const db = {}
