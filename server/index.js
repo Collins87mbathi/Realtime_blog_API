@@ -41,7 +41,7 @@ app.use(helmet());
 //   })
 // )
 
-app.use(cors({ credentials:true, origin:'http://localhost:3001'}));
+app.use(cors({ credentials:true, origin:'https://collinsblogs.herokuapp.com'}));
 
 //client
 app.use(express.static(path.join(__dirname, "/client/build")));
@@ -65,7 +65,7 @@ db.sequelize.sync()
 
 const io = new Server(http,{ 
   cors: {
-    origin: "http://localhost:3001"
+    origin: "https://collinsblogs.herokuapp.com"
 }
 });
 

@@ -19,7 +19,7 @@ const user = useSelector((state) => state.user.user);
 const [socket, setSocket] = useState(null);
 const [notification,setNotification] = useState([]);
 useEffect(()=> {
-   setSocket(io("http://localhost:3001"));
+   setSocket(io("https://collinsblogs.herokuapp.com"));
 },[]);
 
 useEffect(() => {

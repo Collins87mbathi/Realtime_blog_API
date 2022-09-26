@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import "./Filter.scss"
-import axios from 'axios';
-// import { axiosInstance } from '../../config/config';
+// import axios from 'axios';
+import { axiosInstance } from '../../config/config';
 // import {BASE_URL} from '../../config/config'
 
 const Filter = ({search,setSearch,category,setCategory}) => {
@@ -10,7 +10,7 @@ const Filter = ({search,setSearch,category,setCategory}) => {
 
   useEffect(()=> {
    const filterCate = async () => {
-   const res  = await axios.get('http://localhost:3001/api/category/all');
+   const res  = await axiosInstance.get('category/all');
     setOptions(res.data.allcategories)
    }
    
