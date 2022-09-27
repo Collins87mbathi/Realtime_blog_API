@@ -41,7 +41,7 @@ app.use(helmet());
 //   })
 // )
 
-app.use(cors({ credentials:true, origin:'https://collinsblogs.netlify.com'}));
+app.use(cors({ credentials:true, origin:'https://collinsblogs.netlify.app'}));
 
 //client
 // app.use(express.static(path.join(__dirname, "/client/build")));
@@ -65,7 +65,7 @@ db.sequelize.sync()
 
 const io = new Server(http,{ 
   cors: {
-    origin: "https://collinsblogs.netlify.com"
+    origin: "https://collinsblogs.netlify.app"
 }
 });
 
