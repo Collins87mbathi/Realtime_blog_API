@@ -41,7 +41,7 @@ app.use(helmet());
 //   })
 // )
 
-app.use(cors({ credentials:true, origin:'http://localhost:3000'}));
+app.use(cors({ credentials:true, origin:'https://collinsblogs.netlify.com'}));
 
 //client
 // app.use(express.static(path.join(__dirname, "/client/build")));
@@ -65,7 +65,7 @@ db.sequelize.sync()
 
 const io = new Server(http,{ 
   cors: {
-    origin: "http://localhost:3000"
+    origin: "https://collinsblogs.netlify.com"
 }
 });
 
