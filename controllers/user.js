@@ -48,11 +48,11 @@ try {
     };
     const user = await User.findOne({ where: {email:req.body.email}});
     if(!user) {
-     return next(error(403, "there is no user with that email please register"))
+        res.status(401).send("This is email dos not exist");
     }
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if(!isMatch) {
-        return next(error(402, "incorrect password"));
+        res.status(401).send("This is an  incorrect password");
     }
     const token = jwt.sign({id:user.id , isAdmin:user.isAdmin}, process.env.JWT);
     
