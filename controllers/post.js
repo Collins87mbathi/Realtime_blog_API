@@ -1,4 +1,5 @@
 
+const ApiError = require("../errorhandler/error");
 const error = require("../errorhandler/error");
 const db = require("../models/index");
 const Op = db.Sequelize.Op;
@@ -8,9 +9,9 @@ const createPost = async (req,res,next)=> {
     // const {id} = req.user;
 try {
 const {title,desc,category,postimg,userimg,username,userId} = req.body;
-if(!title || !desc ) return next(error(401, "please input values"));
+if(!title || !desc ) return next(ApiError.BadRequest("please input values"));
 
-if(!postimg) return next(error(401, "no images uploaded"));
+if(!postimg) return next(ApiError.BadRequest("no images uploaded"));
 
 const post = await Post.create({
     userId,
@@ -24,7 +25,7 @@ const post = await Post.create({
 const savedPost = await post.save();
 res.status(200).json({savedPost});
 } catch (error) {
-    console.log(error);
+    next(ApiError.InternalError(error));
 }
 }
 
@@ -33,7 +34,7 @@ const getById = async (req,res,next) => {
         const singlepost = await Post.findByPk(req.params.id, {
             include:[db.comment]
         });
-        if(!singlepost) return next(error(400, "post not found"));
+        if(!singlepost) return next(ApiError.NotFound("This post is not found"));
         res.status(200).json({singlepost});
     } catch (error) {
        next(error); 
@@ -47,7 +48,7 @@ const updatePost = async (req,res,next) => {
     });
     res.status(200).json({postupdated});
   } catch (error) {
-   next(error); 
+   next(ApiError.InternalError(error)); 
   } 
 }
 
@@ -58,7 +59,7 @@ const deletePost = async (req,res,next) => {
         });
         res.status(200).json("post successfully deleted");
     } catch (error) {
-      next(error);  
+      next(ApiError.InternalError(error));  
     }
 }
 
@@ -74,7 +75,7 @@ include:[db.comment,db.likes]
         const posts = await Post.findAll(options);
         res.status(200).json({posts});
     } catch (error) {
-       next(error); 
+       next(ApiError.InternalError(error)); 
     }
 }
 

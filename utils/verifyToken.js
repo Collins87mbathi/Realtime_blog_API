@@ -1,17 +1,20 @@
 const error = require("../errorhandler/error");
 const jwt = require("jsonwebtoken");
+const ApiError = require("../errorhandler/error");
 require("dotenv").config();
 
 const verifyToken = (req,res,next) => {
-    const token = req.cookies.access_token;
-    if(!token) {
-       return next(error(401, "You are not authenticated"));
-    }
-   jwt.verify(token , process.env.JWT, (err, user)=> {
-     if(err) return next(error(403, "Token is not valid!"));
-     req.user = user;
-     next();    
-   });
+  const authHeader = req.headers.token;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, process.env.JWT, (err, user) => {
+      if (err) res.status(403).json("Token is not valid!");
+      req.user = user;
+      next();
+    });
+  } else {
+    return res.status(401).json("You are not authenticated!");
+  }
    };
    
    const verifyUser = (req,res, next) => {
@@ -19,7 +22,7 @@ const verifyToken = (req,res,next) => {
         if (req.user.id === req.params.id || req.user.isAdmin) {
           next();
         } else {
-          return next(error(403, "You are not authorized!"));
+          return next(ApiError.UnAuthorized("You are not Authorized"));
         }
       });
    }
@@ -28,7 +31,7 @@ const verifyToken = (req,res,next) => {
         if (req.user.isAdmin) {
           next();
         } else {
-          return next(error(403, "You are not authorized!"));
+          return next(ApiError.UnAuthorized("You are not Authorized"));
         }
       });
    } 

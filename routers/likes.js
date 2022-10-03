@@ -4,18 +4,20 @@ const db = require("../models/index");
 const Likes = db.likes;
 
 router.post("/", verifyUser, async (req, res) => {
-    const { postId } = req.body;
-    const userId = req.user.id;
+    // const { postId } = req.body;
+    const{userId,postId} = req.body;
   
     const found = await Likes.findOne({
-      where: { postId: postId, userId: userId },
+      where: { userId: userId,postId: postId },
     });
     if (!found) {
-      await Likes.create({ postId: postId, userId: userId });
-      res.json({ liked: true });
+      await Likes.create({userId: userId , postId: postId});
+      res.json( {
+        userId
+       });
     } else {
       await Likes.destroy({
-        where: { postId: postId, userId: userId },
+        where: { userId: userId , postId:postId},
       });
       res.json({ liked: false });
     }

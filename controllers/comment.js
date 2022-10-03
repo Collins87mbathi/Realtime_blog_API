@@ -1,6 +1,7 @@
 const db = require("../models/index");
 const Comment = db.comment;
 const error = require("../errorhandler/error");
+const ApiError = require("../errorhandler/error");
 
 const createComment = async (req,res,next) => {
     // const {id} = req.user;
@@ -15,7 +16,7 @@ try {
     const savedComment = await createdComment.save();
     res.status(200).json({savedComment});
 } catch (error) {
-    next(error);
+    next(ApiError.InternalError(error));
 }
 };
 
@@ -24,10 +25,10 @@ const getById = async (req,res,next) => {
     const singlecomment = await Comment.findByPk(req.params.id, {
       include:[db.replies]
     });
-     if(!singlecomment) return next(error(404, "comments not found"));
+     if(!singlecomment) return next(ApiError.NotFound("no comment found"));
      res.status(200).json({singlecomment});
    } catch (error) {
-    next(error);
+    next(ApiError.InternalError(error));
    }
 }
 
@@ -38,7 +39,7 @@ const getAllComments = async (req,res,next) => {
     });
     res.status(200).json({allcomments});
  } catch (error) {
-    next(error);
+    next(ApiError.InternalError(error));
  }
 }
 
@@ -49,7 +50,7 @@ const updateComment = async (req,res,next) => {
       });
       res.status(200).json({postupdated});
     } catch (error) {
-     next(error); 
+     next(ApiError.InternalError(error)); 
     } 
   } 
   
@@ -60,7 +61,7 @@ const updateComment = async (req,res,next) => {
           });
           res.status(200).json("comment successfully deleted");
       } catch (error) {
-        next(error);  
+        next(ApiError.InternalError(error));  
       }
   }
 

@@ -2,7 +2,8 @@ const db = require("../models/index");
 const User = db.user;
 const bcrypt = require("bcryptjs");
 const emailValidator = require("../validators/emailValidator");
-const error = require("../errorhandler/error");
+const passwordValidator = require("../validators/passwordValidator");
+const ApiError = require("../errorhandler/error");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -13,16 +14,16 @@ try {
     const {name,email,password} = req.body;
 
     if(!name || !email || !password) {
-        return next(error(401, "please input values"));
+        return next(ApiError.BadRequest("please input values"));
     }
     if(!emailValidator(email)) {
-        return next(error(400, "please input a valid mail"));
+        return next(ApiError.BadRequest("please input a valied email"));
     }
-    // if(!passwordValidator(password)){
-    //     return next(error(400, "password must contain uppercase and a number"));
-    // }
+    if(!passwordValidator(password)){
+        return next(ApiError.BadRequest("password must contain min 8 characters, at least 1 letter (uppercase and lowercase), 1 number and 1 special character"));
+    }
     const checkmail = await User.findOne({where : {email : email}});
-    if(checkmail) return next(error(402, "this email already exist"));
+    if(checkmail) return next(ApiError.BadRequest("This email already exist"));
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
@@ -37,29 +38,31 @@ try {
    res.status(200).json({user});
 
 } catch (error) {
-    next(error);
+    // next(ApiError.InternalError("something went wrong"));
+    console.log(error);
 }
 };
 
 const Login = async (req,res,next) => {
 try {
     if(!req.body.email || !req.body.password) {
-        return next(error(401, "please input values"));
+        return next(ApiError.BadRequest("please input values"));
     };
     const user = await User.findOne({ where: {email:req.body.email}});
     if(!user) {
-        res.status(401).send("This is email dos not exist");
+        return next(ApiError.BadRequest("This email does not exist"));
     }
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if(!isMatch) {
-        res.status(401).send("This is an  incorrect password");
+        return next(ApiError.BadRequest("This password is incorrect"));
     }
     const token = jwt.sign({id:user.id , isAdmin:user.isAdmin}, process.env.JWT);
     
-     
-  res.cookie("access_token", token, {httpOnly: true}).status(200).json({user});
+  const { password, ...others } = user.dataValues;
+
+  res.status(200).json({user:{...others,token}});
 } catch (error) {
-   next(error); 
+   console.log(error);
 }
 };
 
@@ -80,11 +83,11 @@ try {
     const user = await User.findByPk(req.params.id, {
         include : [db.post]
     });
-    if(!user) return next(error(400, "user not found"));
+    if(!user) return next(ApiError.NotFound("This user is not found"));
 
     res.status(200).json({user});
 } catch (error) {
-   next(error); 
+   next(ApiError.InternalError("something went wrong")); 
 }
 }
 
@@ -95,7 +98,7 @@ try {
     });
     res.status(200).json({users});
 } catch (error) {
-    next(error);
+    next(ApiError.InternalError("something went wrong"));
 }
 }
 
@@ -106,7 +109,7 @@ try {
     });
     res.status(200).json("sucessfully deleted user");
 } catch (error) {
-    next(error);
+    next(ApiError.InternalError("something went wrong"));
 }
 };
 

@@ -17,7 +17,8 @@ module.exports = (sequelize, Sequelize) => {
           },
           userimg: {
             type: Sequelize.STRING,
-          }
+          },
+        
 
     });
 

@@ -12,47 +12,25 @@ const RepliesRoute = require("./routers/replies");
 const CategoryRoute = require("./routers/category");
 const LikeRoute = require("./routers/likes");
 const multer = require("multer");
-// const uploadRoute = require("./routers/upload");
 const path = require("path");
-const cookieParser = require("cookie-parser");
-// const session = require('express-session');
-// const fileUpload = require('express-fileupload');
 const http = require('http').Server(app);
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const ErrorHandler = require("./errorhandler/ErrorHandler");
 
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cookieParser());
 app.use(morgan('combined'));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
-//session of a user after login 
-// app.use(
-//   session({
-//     secret: process.env.SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       secure:true,
-//       maxAge: 24 * 60 * 60 * 1000,
-//     },
-//   })
-// )
-
 app.use(cors({ credentials:true, origin:'https://collinsblogs.netlify.app'}));
 
-//client
-// app.use(express.static(path.join(__dirname, "/client/build")));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-// });
-// app.use(fileUpload({    
-//   useTempFiles: true
-// }));
+//
+//client
+
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 //database
@@ -125,17 +103,7 @@ app.post('/api/upload', upload.single("file"), (req, res) => {
 });
 
 //error handler
-app.use((err,req,res,next)=> {
-const status = err.status || 500;
-const message = err.message || "something went wrong";
-console.log(err.message);
- return res.status(status).json({
-    success:false,
-    status,
-    message
-    
-})
-})
+app.use(ErrorHandler);
 
 
 

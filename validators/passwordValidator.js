@@ -1,5 +1,5 @@
 const passwordValidator = (password) => {
-    const re =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    const re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
     return re.test(password);
 }
 

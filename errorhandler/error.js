@@ -1,9 +1,26 @@
-const error = (status, message) => {
-    let err =  new Error();
-    err.status = status;
-    err.message = message;
-    return err;
-    
-}
+ class ApiError {
+  constructor (status, message) {
+  this.status = status;
+  this.message = message;
+  }
+  static BadRequest(message) {
+    return new ApiError(400,message);
+  }
 
-module.exports = error;
+  static InternalError(message) { 
+    return new ApiError(500,message);
+  }
+
+  static UnAuthorized(message) {
+    return new ApiError(401,message);
+  }
+  static NotFound(message) { 
+    return new ApiError(404, message);
+  }
+  static Forbidden(message) { 
+    return new ApiError(403,message);
+  }
+ }
+
+
+ module.exports = ApiError;
