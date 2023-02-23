@@ -56,7 +56,7 @@ try {
     if(!isMatch) {
         return next(ApiError.BadRequest("This password is incorrect"));
     }
-    const token = jwt.sign({id:user.id , isAdmin:user.isAdmin}, process.env.JWT);
+    const token = jwt.sign({id:user.id , isAdmin:user.isAdmin}, "collo");
     
   const { password, ...others } = user.dataValues;
 
